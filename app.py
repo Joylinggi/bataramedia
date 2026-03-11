@@ -27,16 +27,13 @@ import sqlite3
 
 import os
 import mysql.connector
-from urllib.parse import urlparse
-
-url = urlparse(os.getenv("MYSQL_URL"))
 
 db = mysql.connector.connect(
-    host=url.hostname,
-    user=url.username,
-    password=url.password,
-    database=url.path.replace("/", ""),
-    port=url.port
+    host=os.getenv("MYSQLHOST"),
+    user=os.getenv("MYSQLUSER"),
+    password=os.getenv("MYSQLPASSWORD"),
+    database=os.getenv("MYSQLDATABASE"),
+    port=int(os.getenv("MYSQLPORT"))
 )
 
 cursor = db.cursor(dictionary=True,buffered=True)
