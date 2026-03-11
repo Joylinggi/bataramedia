@@ -30,16 +30,20 @@ import mysql.connector
 from urllib.parse import urlparse
 
 mysql_url = os.getenv("MYSQL_URL")
+if not mysql_url:
+    raise ValueError("MYSQL_URL environment variable is not set")
 
 url = urlparse(mysql_url)
 
 db = mysql.connector.connect(
-    host=str(url.hostname),
-    user=str(url.username),
-    password=str(url.password),
-    database=str(url.path.replace("/", "")),
-    port=int(url.port or 3306)
+    host=os.getenv("MYSQLHOST"),
+    user=os.getenv("MYSQLUSER"),
+    password=os.getenv("MYSQLPASSWORD"),
+    database=os.getenv("MYSQLDATABASE"),
+    port=int(os.getenv("MYSQLPORT", 3306))
 )
+
+print("Koneksi MySQL berhasil!")
 
 cursor = db.cursor(dictionary=True,buffered=True)
 @app.context_processor
