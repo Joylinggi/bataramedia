@@ -61,14 +61,6 @@ def inject_wishlist_count():
         return dict(wishlist_count=result["total"] if result else 0)
     return dict(wishlist_count=0)
 
-#  Koneksi ke Database
-db = mysql.connector.connect(
-    host="localhost",
-    user="root",
-    password="",  
-    database="aktivasi_acount",  
-)
-cursor = db.cursor(dictionary=True,buffered=True)
 
 
 # homepage/katalog produk
