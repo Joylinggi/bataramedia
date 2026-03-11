@@ -29,11 +29,13 @@ import os
 
 #  Koneksi ke Database
 db = mysql.connector.connect(
-    host="localhost",
-    user="root",
-    password="",  
-    database="aktivasi_acount",  
-)
+    host=os.getenv("MYSQLHOST"),
+    user=os.getenv("MYSQLUSER"),
+    password=os.getenv("MYSQLPASSWORD"),
+    database=os.getenv("MYSQLDATABASE"),
+    port=os.getenv("MYSQLPORT")
+) 
+
 cursor = db.cursor(dictionary=True,buffered=True)
 @app.context_processor
 def inject_cart_count():
