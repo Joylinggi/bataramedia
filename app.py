@@ -34,11 +34,11 @@ mysql_url = os.getenv("MYSQL_URL")
 url = urlparse(mysql_url)
 
 db = mysql.connector.connect(
-    host=url.hostname,
-    user=url.username,
-    password=url.password,
-    database=url.path[1:],
-    port=url.port or 3306
+    host=str(url.hostname),
+    user=str(url.username),
+    password=str(url.password),
+    database=str(url.path.replace("/", "")),
+    port=int(url.port or 3306)
 )
 
 cursor = db.cursor(dictionary=True,buffered=True)
