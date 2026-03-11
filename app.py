@@ -26,15 +26,15 @@ app.secret_key = "ini_secret_key_saya"
 import sqlite3
 
 import os
+import mysql.connector
 
-#  Koneksi ke Database
 db = mysql.connector.connect(
     host=os.getenv("MYSQLHOST"),
     user=os.getenv("MYSQLUSER"),
     password=os.getenv("MYSQLPASSWORD"),
     database=os.getenv("MYSQLDATABASE"),
-    port=os.getenv("MYSQLPORT")
-) 
+    port=int(os.getenv("MYSQLPORT"))
+)
 
 cursor = db.cursor(dictionary=True,buffered=True)
 @app.context_processor
